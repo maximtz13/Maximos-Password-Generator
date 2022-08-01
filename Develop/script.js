@@ -15,13 +15,27 @@ var generatePassword = function () {
     length = window.prompt("Choose a password length. (between 8 to 128 characters long)");
     if (!(length >= 8 && length <= 128)) {
       window.alert("Choose a number between 8-128.");
-    } else { 
+    } else {
       // Validation
-      window.alert("Thank you for choosing a password length."); 
-      continue }
+      window.alert("Thank you for choosing a password length.");
+      continue
+    }
   }
 
   // Prompt Ask for Character Types (minimum 1, prompt if not met)(Validate)
+  var charTypes = function () {
+    // Start of Loop for Character Type Until at Least One Type is Chosen
+    while (password.length === 0) {
+      // Alert if less than 1 character types are chosen
+      window.alert("At least one character type must be chosen in order to generate password.");
+
+      // lowercase letter character type prompt
+      
+
+      
+    }
+  }
+
   // After All Prompts Generate Password On Page
 };
 
