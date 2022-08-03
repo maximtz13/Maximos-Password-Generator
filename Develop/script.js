@@ -44,7 +44,6 @@ var generatePassword = function () {
 
         if (promptLower === "no") {
           window.alert("Lowercase characters have been skipped.");
-          upperFun();
         }
 
         if (promptLower === "yes") {
@@ -67,7 +66,6 @@ var generatePassword = function () {
 
         if (promptUpper === "no") {
           window.alert("Uppercase characters have been skipped.");
-          numberFun();
         };
 
         if (promptUpper === "yes") {
@@ -90,7 +88,6 @@ var generatePassword = function () {
 
         if (promptNumber === "no") {
           window.alert("Number characters have been skipped.");
-          specFun();
         }
 
         if (promptNumber === "yes") {
@@ -113,7 +110,6 @@ var generatePassword = function () {
 
         if (promptSpec === "no") {
           window.alert("Special characters have been skipped.");
-          finishedRes();
         }
 
         if (promptSpec === "yes") {
@@ -125,21 +121,17 @@ var generatePassword = function () {
       };
     };
 
-    
-
-    finishedRes();
+    return finishedRes();
     function finishedRes() {
       for (var i=0; i<(lengthP - includedCriteria.length); i++) {
         generatedPassword += criteria.charAt(Math.floor(Math.random() * criteria.length));
       }
       generatedPassword += includedCriteria;
       window.alert("Password criteria successfully set, Thank You!");
-      debugger;
       return generatedPassword;
     };
-
   };
-  charTypes();
+  return charTypes();
 
 
 };
