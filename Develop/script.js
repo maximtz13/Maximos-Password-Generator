@@ -4,15 +4,14 @@
 
 // Create Initial Function
 var generatePassword = function () {
-  var criteria = [];
-  var password = "";
-  var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-  var upperCase = lowerCase.map(function (a) {
-    return a.toUpperCase();
-  });
-  var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  var specChar = ['/', '[', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\\', '-', '=', '{', '}', ';', ':', '"', '|', ',', '.', '<', '>', '?', '+', ']'];
+  var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+  var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var num = "0123456789";
+  var specChar = "!@#$%^&*()";
+  var criteria = "";
+  var generatedPassword = "";
   var lengthP = 0;
+  var includedCriteria = "";
   // Prompt Password Length (prompt if not met)(Validate)
   while (!(lengthP >= 8 && lengthP <= 128)) {
     lengthP = window.prompt("Choose a password length. (between 8 to 128 characters long)");
@@ -26,10 +25,10 @@ var generatePassword = function () {
   }
 
   // Prompt Ask for Character Types (minimum 1, prompt if not met)(Validate)
-  var charTypes = function () {
+  function charTypes () {
     // Start of Loop for Character Type Until at Least One Type is Chosen
     while (criteria.length === 0) {
-      var passwordCrit = ""
+
       // choose a character type
       window.alert("At least one character type must be chosen in order to generate password.");
       
@@ -51,8 +50,8 @@ var generatePassword = function () {
         if (promptLower === "yes") {
           window.alert("Lowercase characters have been added.");
           criteria += lowerCase;
-          passwordCrit += lowerCase[Math.floor(Math.random() * lowerCase.length)];
-          upperFun();
+          includedCriteria += lowerCase.charAt(Math.floor(Math.random() * lowerCase.length));
+          console.log(includedCriteria);
         }
       };
 
@@ -74,8 +73,8 @@ var generatePassword = function () {
         if (promptUpper === "yes") {
           window.alert("Uppercase characters have been added.");
           criteria += upperCase;
-          passwordCrit += upperCase[Math.floor(Math.random() * upperCase.length)];
-          numberFun();
+          includedCriteria += upperCase.charAt(Math.floor(Math.random() * upperCase.length));
+          console.log(includedCriteria);
         };
       };
 
@@ -97,10 +96,10 @@ var generatePassword = function () {
         if (promptNumber === "yes") {
           window.alert("Number characters have been added.");
           criteria += num;
-          passwordCrit += num[Math.floor(Math.random() * num.length)];
-          specFun();
-        }
+          includedCriteria += num.charAt(Math.floor(Math.random() * num.length));
+          console.log(includedCriteria);
       };
+    };
 
       specFun();
       function specFun() {
@@ -120,39 +119,30 @@ var generatePassword = function () {
         if (promptSpec === "yes") {
           window.alert("Special characters have been added.");
           criteria += specChar;
-          passwordCrit += specChar[Math.floor(Math.random() * specChar.length)];
+          includedCriteria += specChar.charAt(Math.floor(Math.random() * specChar.length));
+          console.log(includedCriteria);
         }
-        console.log(criteria);
       };
     };
 
+    
+
     finishedRes();
     function finishedRes() {
+      for (var i=0; i<(lengthP - includedCriteria.length); i++) {
+        generatedPassword += criteria.charAt(Math.floor(Math.random() * criteria.length));
+      }
+      generatedPassword += includedCriteria;
       window.alert("Password criteria successfully set, Thank You!");
-      return passwordCrit;
+      debugger;
+      return generatedPassword;
     };
+
   };
+  charTypes();
 
-  password+=charTypes();
 
-  charOptions = [];
-
-  for (i = 0; i < criteria.length; i++) {
-    if (criteria[i] === ',') {
-      continue;
-    }
-    else {
-      charOptions += criteria[i];
-    }
-  }
-
-  var charLength = lengthP - password.length;
-
-  for (let i = 0; i < charLength; i++) {
-    password += charOptions[Math.floor(Math.random() * charOptions.length)];
-  }
 };
-
 // After All Prompts Generate Password On Page
 
 // Get references to the #generate element
