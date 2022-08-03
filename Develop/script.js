@@ -1,17 +1,18 @@
 // Assignment code here
 // Add Variables
-var criteria = [];
-var password = "";
-var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-var upperCase = lowerCase.map(function (a) {
-  return a.toUpperCase();
-});
-var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-var specChar = ['/', '[', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\\', '-', '=', '{', '}', ';', ':', '"', '|', ',', '.', '<', '>', '?', '+', ']'];
-var lengthP = 0;
+
 
 // Create Initial Function
 var generatePassword = function () {
+  var criteria = [];
+  var password = "";
+  var lowerCase = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+  var upperCase = lowerCase.map(function (a) {
+    return a.toUpperCase();
+  });
+  var num = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+  var specChar = ['/', '[', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '+', '\\', '-', '=', '{', '}', ';', ':', '"', '|', ',', '.', '<', '>', '?', '+', ']'];
+  var lengthP = 0;
   // Prompt Password Length (prompt if not met)(Validate)
   while (!(lengthP >= 8 && lengthP <= 128)) {
     lengthP = window.prompt("Choose a password length. (between 8 to 128 characters long)");
@@ -19,7 +20,7 @@ var generatePassword = function () {
       window.alert("Choose a number between 8-128.");
     } else {
       // Validation
-      window.alert("Thank you for choosing a password length.");
+      window.alert("Password length has been chosen.");
       continue
     }
   }
@@ -27,21 +28,21 @@ var generatePassword = function () {
   // Prompt Ask for Character Types (minimum 1, prompt if not met)(Validate)
   var charTypes = function () {
     // Start of Loop for Character Type Until at Least One Type is Chosen
-    while (criteria.length === 0 || criteria.length === "") {
+    while (criteria.length === 0) {
       var passwordCrit = ""
       // choose a character type
       window.alert("At least one character type must be chosen in order to generate password.");
+      
       lowerFun();
-
       function lowerFun() {
         var promptLower = window.prompt('Would you like to include lowercase characters in your password? Enter "YES" or "NO" to choose.');
+        promptLower = promptLower.toLowerCase();
 
-        if (promptLower === "" || promptLower === null) {
+        if (!(promptLower === "yes" || promptLower === "no")) {
           window.alert('You must enter "YES" or "NO" to proceed! Please try again.');
           return lowerFun();
         }
 
-        promptLower = promptLower.toLowerCase();
         if (promptLower === "no") {
           window.alert("Lowercase characters have been skipped.");
           upperFun();
@@ -49,7 +50,7 @@ var generatePassword = function () {
 
         if (promptLower === "yes") {
           window.alert("Lowercase characters have been added.");
-          criteria+=lowerCase;
+          criteria += lowerCase;
           passwordCrit += lowerCase[Math.floor(Math.random() * lowerCase.length)];
           upperFun();
         }
@@ -59,12 +60,12 @@ var generatePassword = function () {
       function upperFun() {
         var promptUpper = window.prompt('Would you like to include uppercase characters in your password? Enter "YES" or "NO" to choose.');
 
-        if (promptUpper === "" || promptUpper === null) {
+        promptUpper = promptUpper.toLowerCase();
+        if (!(promptUpper === "yes" || promptUpper === "no")) {
           window.alert('You must enter "YES" or "NO" to proceed! Please try again.');
           return upperFun();
         };
 
-        promptUpper = promptUpper.toLowerCase();
         if (promptUpper === "no") {
           window.alert("Uppercase characters have been skipped.");
           numberFun();
@@ -72,7 +73,7 @@ var generatePassword = function () {
 
         if (promptUpper === "yes") {
           window.alert("Uppercase characters have been added.");
-          criteria+=upperCase;
+          criteria += upperCase;
           passwordCrit += upperCase[Math.floor(Math.random() * upperCase.length)];
           numberFun();
         };
@@ -82,12 +83,12 @@ var generatePassword = function () {
       function numberFun() {
         var promptNumber = window.prompt('Would you like to include number characters in your password? Enter "YES" or "NO" to choose.');
 
-        if (promptNumber === "" || promptNumber === null) {
+        promptNumber = promptNumber.toLowerCase();
+        if (!(promptNumber === "yes" || promptNumber === "no")) {
           window.alert('You must enter "YES" or "NO" to proceed! Please try again.');
           return numberFun();
         }
 
-        promptNumber = promptNumber.toLowerCase();
         if (promptNumber === "no") {
           window.alert("Number characters have been skipped.");
           specFun();
@@ -95,7 +96,7 @@ var generatePassword = function () {
 
         if (promptNumber === "yes") {
           window.alert("Number characters have been added.");
-          criteria = +num;
+          criteria += num;
           passwordCrit += num[Math.floor(Math.random() * num.length)];
           specFun();
         }
@@ -105,12 +106,12 @@ var generatePassword = function () {
       function specFun() {
         var promptSpec = window.prompt('Would you like to include special characters in your password? Enter "YES" or "NO" to choose.');
 
-        if (promptSpec === "" || promptSpec === null) {
+        promptSpec = promptSpec.toLowerCase();
+        if (!(promptSpec === "yes" || promptSpec === "no")) {
           window.alert('You must enter "YES" or "NO" to proceed! Please try again.');
           return specFun();
         }
 
-        promptSpec = promptSpec.toLowerCase();
         if (promptSpec === "no") {
           window.alert("Special characters have been skipped.");
           finishedRes();
@@ -120,19 +121,19 @@ var generatePassword = function () {
           window.alert("Special characters have been added.");
           criteria += specChar;
           passwordCrit += specChar[Math.floor(Math.random() * specChar.length)];
-          finishedRes();
         }
         console.log(criteria);
       };
     };
+
     finishedRes();
     function finishedRes() {
-      window.alert("Password criteria successfully set, Thank You!")
+      window.alert("Password criteria successfully set, Thank You!");
       return passwordCrit;
     };
   };
 
-  password += charTypes();
+  password+=charTypes();
 
   charOptions = [];
 
@@ -150,8 +151,6 @@ var generatePassword = function () {
   for (let i = 0; i < charLength; i++) {
     password += charOptions[Math.floor(Math.random() * charOptions.length)];
   }
-
-  return password;
 };
 
 // After All Prompts Generate Password On Page
