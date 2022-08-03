@@ -6,3 +6,6 @@
 
 ## Where can I see this page?
 - [https://maximtz13.github.io/Password-Generator/](https://maximtz13.github.io/Password-Generator/)
+
+## Screenshot of page
+![Maximo's Password Generator](./Develop/Untitled.png)
